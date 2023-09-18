@@ -4,7 +4,7 @@ let arrayOfCharacters = [];
 const arrayOfWrongCharacters = [];
 
 const setWord = async () => {
-    await getRandomWord().then((res) => (arrayOfCharacters = [...res[0]]));
+    await getRandomWord().then(({ word }) => (arrayOfCharacters = [...word]));
 
     const wordEl = document.querySelector("#word");
 
