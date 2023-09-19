@@ -35,10 +35,36 @@ body {
 .container {
     max-width: 1200px;
     width: 90vw;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-direction: column;
 
     min-height: 300px;
+}
+
+#wrong-characters-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#wrong-characters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 400px;
+}
+.wrong-character {
+    border: 1px solid black;
+    background-color: #222;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    min-width: 20px;
+    text-align: center;
 }
