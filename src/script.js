@@ -2,29 +2,32 @@ import getRandomWord from "./utils/getRandomWord.js";
 import Line from "./components/line.js";
 import setWrongCharacters from "./utils/setWrongCharacters.js";
 
-// Variable for minimum length of each word
-const MINIMUM_LENGTH_OF_WORD = 8;
+// Maximum length required for the word
+const MAXIMUM_LENGTH_OF_WORD = 7;
 
-// Declaring an empty array variable to store characters
+// Array to store the characters of the word
 let arrayOfCharacters = [];
 
-// Declaring an empty array constant to store wrong characters
+// Array to store wrong characters
 const arrayOfWrongCharacters = [];
 
-// Declaring an asynchronous function named setWord
+// Asynchronous function to set the word
 const setWord = async () => {
     try {
-        // Waiting for the getRandomWord promise to resolve and extracting the 'word' property from the resolved value
-        await getRandomWord()
-            .then(({ word }) => (arrayOfCharacters = [...word]))
-            .catch((err) => console.error(err));
+        // Fetching a random word and extracting the 'word' property from the resolved value
+        const { word } = await getRandomWord().catch((err) =>
+            console.error(err)
+        );
 
-        if (arrayOfCharacters.length < MINIMUM_LENGTH_OF_WORD) {
-            // Selecting an HTML element with the id "word" and assigning it to the wordEl constant
+        // Checking if the word length is less than the maximum length required
+        if (word.length < MAXIMUM_LENGTH_OF_WORD) {
+            // Selecting the HTML element with the id "word"
             const wordEl = document.querySelector("#word");
+            // Clearing the content of the word element
+            wordEl.textContent = "";
 
-            // Set to empty after we got the data from API
-            wordEl.innerHTML = "";
+            // Storing the characters of the word in the arrayOfCharacters array
+            arrayOfCharacters = [...word];
 
             // Looping through each character in the arrayOfCharacters array
             arrayOfCharacters.forEach((char) => {
@@ -32,7 +35,7 @@ const setWord = async () => {
                 window.addEventListener("keydown", (e) => {
                     // Checking if the pressed key is included in the arrayOfCharacters
                     if (arrayOfCharacters.includes(e.key)) {
-                        // Selecting all DOM elements with the class name "line-value" and assigning them to the allLineValues constant
+                        // Selecting all DOM elements with the class name "line-value"
                         const allLineValues =
                             document.querySelectorAll(".line-value");
                         // Looping through the arrayOfCharacters
@@ -43,13 +46,16 @@ const setWord = async () => {
                                 allLineValues[i].classList.add("show");
                             }
                         }
-                    } else setWrongCharacters(arrayOfWrongCharacters, e);
+                    } else {
+                        // Calling the setWrongCharacters function with the arrayOfWrongCharacters array and the pressed key
+                        setWrongCharacters(arrayOfWrongCharacters, e);
+                    }
                 });
-
                 // Appending a Line component with the current character to the wordEl
                 wordEl.append(Line(char));
             });
         } else {
+            // If the word length is greater than or equal to the minimum length, recursively call the setWord function
             setWord();
         }
     } catch (error) {
@@ -57,8 +63,10 @@ const setWord = async () => {
     }
 };
 
+// Event listener to initialize the game when the DOM content is loaded
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
+    // Calling the setWord function to start the game
     setWord();
 }
