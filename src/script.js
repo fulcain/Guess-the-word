@@ -1,6 +1,11 @@
+//  Import getRandomWord helper function that fetches data from an API
 import getRandomWord from "./utils/getRandomWord.js";
-import Line from "./components/line.js";
+
+//  Import setWrongCharacters helper function to pass the arrayOfWrong and the pressed key to the function
 import setWrongCharacters from "./utils/setWrongCharacters.js";
+
+// Import Line component to create a line for each character of the word
+import Line from "./components/line.js";
 
 // Maximum length required for the word
 const MAXIMUM_LENGTH_OF_WORD = 7;
@@ -23,6 +28,7 @@ const setWord = async () => {
         if (word.length < MAXIMUM_LENGTH_OF_WORD) {
             // Selecting the HTML element with the id "word"
             const wordEl = document.querySelector("#word");
+
             // Clearing the content of the word element
             wordEl.textContent = "";
 
@@ -38,7 +44,7 @@ const setWord = async () => {
                         // Selecting all DOM elements with the class name "line-value"
                         const allLineValues =
                             document.querySelectorAll(".line-value");
-                        // Looping through the arrayOfCharacters
+                        // Looping through the arrayOfCharacters for applying the show classList
                         for (let i = 0; i < arrayOfCharacters.length; i++) {
                             // Checking if the current element in the arrayOfCharacters at index i is equal to the pressed key
                             if (arrayOfCharacters[i] === e.key) {
@@ -46,7 +52,9 @@ const setWord = async () => {
                                 allLineValues[i].classList.add("show");
                             }
                         }
-                    } else {
+                    }
+                    // If the pressed key is NOT included in the arrayOfCharacters this code is executed
+                    else {
                         // Calling the setWrongCharacters function with the arrayOfWrongCharacters array and the pressed key
                         setWrongCharacters(arrayOfWrongCharacters, e);
                     }
@@ -54,8 +62,9 @@ const setWord = async () => {
                 // Appending a Line component with the current character to the wordEl
                 wordEl.append(Line(char));
             });
-        } else {
-            // If the word length is greater than or equal to the minimum length, recursively call the setWord function
+        }
+        // If the word length is greater than or equal to the minimum length, recursively call the setWord function
+        else {
             setWord();
         }
     } catch (error) {
