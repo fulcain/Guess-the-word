@@ -35,7 +35,7 @@ const setWord = async () => {
                         allLineValues[i].classList.add("show");
                     }
                 }
-            } else setWrongCharacters(arrayOfWrongCharacters);
+            } else setWrongCharacters(arrayOfWrongCharacters,e);
         });
 
         // Appending a Line component with the current character to the wordEl
