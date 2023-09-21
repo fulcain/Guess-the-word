@@ -6,11 +6,18 @@
 const checkWrongAnswers = (arrayOfWrongCharacters) => {
     /** If the length of the arrayOfWrongCharacters is greater than or equal to 10 */
     if (arrayOfWrongCharacters.length >= 10) {
-        /** Display an alert message indicating loss */
-        alert("You Lost!");
-
-        /**  Reload the page using the location.reload() method*/
-        location.reload();
+        silverBox({
+            timer: 1500,
+            theme: "dark",
+            alertIcon: "error",
+            title: "You Lost!",
+            centerContent: true,
+            showCloseButton: true,
+            /** Reload the page */
+            onClose: () => {
+                location.reload();
+            },
+        });
     }
 };
 
