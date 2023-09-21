@@ -17,10 +17,18 @@ const checkCorrectAnswer = (arrayOfCharacters, correctKey) => {
 
     /** If correctCharacterAnswers is greater than or equal to the length of arrayOfCharacters */
     if (correctCharacterAnswers >= arrayOfCharacters.length) {
-        alert("You won");
-
-        /** Reload the page */
-        location.reload();
+        silverBox({
+            timer: 1500,
+            theme: "dark",
+            alertIcon: "success",
+            title: "You Won!",
+            centerContent: true,
+            showCloseButton: true,
+            /** Reload the page */
+            onClose: () => {
+                location.reload();
+            },
+        });
     }
 
     return true;
