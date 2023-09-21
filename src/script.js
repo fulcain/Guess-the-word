@@ -1,17 +1,14 @@
-/**  Import getRandomWord helper function that fetches data from an API */
 import getRandomWord from "./utils/getRandomWord.js";
-
-/**  Import setWrongCharacters helper function to pass the arrayOfWrong and the pressed key to the function */
 import setWrongCharacters from "./utils/setWrongCharacters.js";
-
-/** Import Line component to create a line for each character of the word */
+import checkCorrectAnswer from "./utils/checkCorrectAnswer.js";
 import Line from "./components/line.js";
+import checkWrongAnswers from "./utils/checkWrongAnswers.js";
 
 /** Maximum length required for the word */
 const MAXIMUM_LENGTH_OF_WORD = 7;
 
 /** Array to store wrong characters */
-const arrayOfWrongCharacters = [];
+let arrayOfWrongCharacters = [];
 
 /** Array of characters to store each character of the word */
 let arrayOfCharacters = [];
@@ -56,6 +53,9 @@ const setWord = async () => {
                 for (let i = 0; i < arrayOfCharacters.length; i++) {
                     /** Checking if the current element in the arrayOfCharacters at index i is equal to the pressed key */
                     if (arrayOfCharacters[i] === e.key) {
+                        /** Add to the correctCharacterAnswers if the character is in the list */
+                        checkCorrectAnswer(arrayOfCharacters,e.key);
+
                         /** Adding the "show" class to the corresponding element at index i in allLineValues */
                         allLineValues[i].classList.add("show");
                     }
@@ -63,6 +63,7 @@ const setWord = async () => {
             } else {
                 /** Calling the setWrongCharacters function with the arrayOfWrongCharacters array and the pressed key */
                 setWrongCharacters(arrayOfWrongCharacters, e);
+                checkWrongAnswers(arrayOfWrongCharacters)
             }
         });
     } catch (error) {
