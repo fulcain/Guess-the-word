@@ -16,6 +16,9 @@ let arrayOfCharacters = [];
 /** Asynchronous function to set the word */
 const setWord = async () => {
     try {
+        /**
+         * @type {Object} - An object that is fetched from getRandomWord() function
+         */
         let word;
 
         do {
