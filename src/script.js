@@ -42,8 +42,6 @@ const setWord = async () => {
         /** Appending the Line components to the wordEl */
         wordEl.append(...lines);
 
-        console.log(arrayOfCharacters)
-
         /** Adding a keydown event listener to the window object */
         window.addEventListener("keydown", (e) => {
             /** Checking if the pressed key is included in the arrayOfCharacters */
