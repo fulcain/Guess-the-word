@@ -1,4 +1,4 @@
-## how does the app word
+## how does the app work
 
 In this game you have to guess a word.
 
