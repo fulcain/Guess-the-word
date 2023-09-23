@@ -14,7 +14,7 @@ const checkCorrectAnswer = (arrayOfCharacters, correctKey) => {
         correctCharacterAnswers++;
         arrayOfGuessedCorrectCharacters.push(correctKey);
     }
-
+    
     /** If correctCharacterAnswers is greater than or equal to the length of arrayOfCharacters */
     if (correctCharacterAnswers >= arrayOfCharacters.length) {
         silverBox({

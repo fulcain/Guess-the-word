@@ -37,10 +37,12 @@ const setWord = async () => {
         arrayOfCharacters = [...word];
 
         /** Creating an array of Line components */
-        const lines = arrayOfCharacters.map((char) => Line(char));
+        const lines = arrayOfCharacters.map((char) => Line(char.toLowerCase()));
 
         /** Appending the Line components to the wordEl */
         wordEl.append(...lines);
+
+        console.log(arrayOfCharacters)
 
         /** Adding a keydown event listener to the window object */
         window.addEventListener("keydown", (e) => {
